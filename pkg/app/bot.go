@@ -7,10 +7,10 @@ import (
 )
 
 type BotConfig struct {
-	Bot *tele.Bot
+	Self *tele.Bot
 }
 
-func NewBot(cfg *config.BotSettings) (*tele.Bot, error) {
+func NewBot(cfg config.BotSettings) (*BotConfig, error) {
 
 	// настройка характеристик бота
 	pref := tele.Settings{
@@ -25,6 +25,6 @@ func NewBot(cfg *config.BotSettings) (*tele.Bot, error) {
 		return nil, err
 	}
 
-	return bot, nil
+	return &BotConfig{Self: bot}, nil
 
 }
