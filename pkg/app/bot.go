@@ -28,3 +28,16 @@ func NewBot(cfg config.BotSettings) (*BotConfig, error) {
 	return &BotConfig{Self: bot}, nil
 
 }
+
+func (bot *BotConfig) SetupHandlers() {
+
+	bot.Self.Handle("/start", func(c tele.Context) error {
+		return c.Send("hello world")
+	})
+}
+
+func (bot *BotConfig) Start() {
+
+	bot.Self.Start()
+
+}

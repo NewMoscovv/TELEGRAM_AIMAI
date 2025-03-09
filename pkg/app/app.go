@@ -20,5 +20,8 @@ func NewApp(cfg config.Config) (*App, error) {
 }
 
 func (app *App) Start() {
-	app.Bot.Self.Start()
+
+	app.Bot.SetupHandlers()
+
+	app.Bot.Start()
 }
