@@ -1,14 +1,17 @@
 package app
 
-import "AIMAI/pkg/config"
+import (
+	"AIMAI/pkg/config"
+	"AIMAI/pkg/logger"
+)
 
 type App struct {
 	Bot *BotConfig
 }
 
-func NewApp(cfg *config.Config) (*App, error) {
+func NewApp(cfg *config.Config, logger *logger.Logger) (*App, error) {
 
-	bot, err := NewBot(cfg.BotSettings)
+	bot, err := NewBot(cfg.BotSettings, logger)
 	if err != nil {
 		return nil, err
 	}

@@ -18,7 +18,7 @@ func main() {
 	}
 
 	// инициируем приложение
-	app, err := myApp.NewApp(cfg)
+	app, err := myApp.NewApp(cfg, logger)
 	if err != nil {
 		logger.Err.Panic(err)
 	}
