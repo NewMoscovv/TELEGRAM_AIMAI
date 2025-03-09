@@ -7,3 +7,11 @@ const (
 	OpenRouterUrlIsAbsent   = "отсутствует API_URL"
 	OpenRouterModelIsAbsent = "отсутствует название Модели"
 )
+
+// ошибки open_router
+const (
+	ResponseBodyError    = "ошибка при чтении ответа"
+	ApiRouterError       = "ошибка API"
+	JSONParsingError     = "ошибка при парсинге JSON"
+	EmptyAnswerByAIError = "нет ответа от ИИ"
+)

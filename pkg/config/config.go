@@ -1,6 +1,7 @@
 package config
 
 import (
+	"AIMAI/internal/openrouter"
 	"AIMAI/pkg/consts"
 	"errors"
 	"github.com/joho/godotenv"
@@ -15,6 +16,8 @@ type Config struct {
 type BotSettings struct {
 	TelegramToken string
 	Messages      Messages
+
+	OpenRtr openrouter.Client
 }
 
 type Messages struct {
@@ -60,6 +63,27 @@ func parseEnv(cfg *Config) error {
 	telegramToken := os.Getenv("TELEGRAM_TOKEN")
 	if telegramToken == "" {
 		return errors.New(consts.TelegramTokenIsAbsent)
+	}
+
+	openRouterToken := os.Getenv("OPENROUTER_TOKEN")
+	if openRouterToken == "" {
+		return errors.New(consts.OpenRouterTokenIsAbsent)
+	}
+
+	apiUrl := os.Getenv("API_URL")
+	if apiUrl == "" {
+		return errors.New(consts.OpenRouterUrlIsAbsent)
+	}
+
+	model := os.Getenv("MODEL")
+	if model == "" {
+		return errors.New(consts.OpenRouterModelIsAbsent)
+	}
+
+	cfg.BotSettings.OpenRtr = openrouter.Client{
+		APIUrl: apiUrl,
+		Model:  model,
+		APIKey: openRouterToken,
 	}
 
 	cfg.BotSettings.TelegramToken = telegramToken

@@ -38,6 +38,9 @@ func NewBot(cfg config.BotSettings, logger *myLogger.Logger) (*BotConfig, error)
 	// инициализация мидлвари
 	middlewares := middleware.NewMiddleware(logger)
 
+	// инициализируем openrouter
+	openRtr := openrouter.NewClient(cfg.OpenRtr.APIKey, cfg.OpenRtr.APIUrl, cfg.OpenRtr.Model)
+
 	// создание мапы юзерс
 	users := make(map[int64]user.User)
 
@@ -45,13 +48,15 @@ func NewBot(cfg config.BotSettings, logger *myLogger.Logger) (*BotConfig, error)
 		Self:       bot,
 		Middleware: middlewares,
 		Messages:   cfg.Messages,
+		OpenRtr:    openRtr,
 		Users:      users}, nil
 
 }
 
 func (bot *BotConfig) SetupHandlers() {
 
-	bot.Self.Handle("/start", bot.Middleware.LoggingMiddleware(bot.HandlerStart))
+	bot.Self.Handle("/start", bot.Middleware.LoggingMiddleware(bot.HandleStart))
+	bot.Self.Handle(tele.OnText, bot.Middleware.LoggingMiddleware(bot.HandlerMessage))
 }
 
 func (bot *BotConfig) Start() {
