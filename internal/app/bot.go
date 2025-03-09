@@ -2,6 +2,7 @@ package app
 
 import (
 	"AIMAI/internal/middleware"
+	"AIMAI/internal/openrouter"
 	"AIMAI/internal/user"
 	"AIMAI/pkg/config"
 	myLogger "AIMAI/pkg/logger"
@@ -15,8 +16,8 @@ type BotConfig struct {
 	Middleware *middleware.Middleware
 	Messages   config.Messages
 	Users      map[int64]user.User
-
-	mu sync.RWMutex
+	OpenRtr    *openrouter.Client
+	mu         sync.RWMutex
 }
 
 func NewBot(cfg config.BotSettings, logger *myLogger.Logger) (*BotConfig, error) {
