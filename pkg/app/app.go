@@ -6,7 +6,7 @@ type App struct {
 	Bot *BotConfig
 }
 
-func NewApp(cfg config.Config) (*App, error) {
+func NewApp(cfg *config.Config) (*App, error) {
 
 	bot, err := NewBot(cfg.BotSettings)
 	if err != nil {

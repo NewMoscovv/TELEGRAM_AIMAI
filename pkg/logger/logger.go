@@ -10,7 +10,7 @@ type Logger struct {
 	Info *log.Logger
 }
 
-func InitLogger() *Logger {
+func Init() *Logger {
 	logger := Logger{}
 	logger.Info = log.New(os.Stdout, "[ИНФО]   ", log.Ldate|log.Ltime)
 	logger.Err = log.New(os.Stderr, "[ОШИБКА] ", log.Ldate|log.Ltime|log.Lshortfile)
