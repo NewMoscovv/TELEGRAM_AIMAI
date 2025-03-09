@@ -9,8 +9,8 @@ import (
 )
 
 type BotConfig struct {
-	Self   *tele.Bot
-	logger *myLogger.Logger
+	Self       *tele.Bot
+	Middleware *middleware.Middleware
 }
 
 func NewBot(cfg config.BotSettings, logger *myLogger.Logger) (*BotConfig, error) {
@@ -28,15 +28,18 @@ func NewBot(cfg config.BotSettings, logger *myLogger.Logger) (*BotConfig, error)
 		return nil, err
 	}
 
-	return &BotConfig{Self: bot, logger: logger}, nil
+	// инициализация мидлвари
+	middlewares := middleware.NewMiddleware(logger)
+
+	return &BotConfig{Self: bot, Middleware: middlewares}, nil
 
 }
 
 func (bot *BotConfig) SetupHandlers() {
 
-	bot.Self.Handle("/start", middleware.LoggingMiddleware(func(c tele.Context) error {
+	bot.Self.Handle("/start", bot.Middleware.LoggingMiddleware(func(c tele.Context) error {
 		return c.Send("hello world")
-	}, bot.logger))
+	}))
 }
 
 func (bot *BotConfig) Start() {
