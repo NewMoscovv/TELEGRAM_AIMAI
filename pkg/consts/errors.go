@@ -2,10 +2,11 @@ package consts
 
 // ошибки конфигурации
 const (
-	TelegramTokenIsAbsent   = "отсутствует TELEGRAM_TOKEN"
-	OpenRouterTokenIsAbsent = "отсутствует токен OpenRouter"
-	OpenRouterUrlIsAbsent   = "отсутствует API_URL"
-	OpenRouterModelIsAbsent = "отсутствует название Модели"
+	TelegramTokenIsAbsent    = "отсутствует TELEGRAM_TOKEN"
+	OpenRouterTokenIsAbsent  = "отсутствует токен OpenRouter"
+	OpenRouterUrlIsAbsent    = "отсутствует API_URL"
+	OpenRouterModelIsAbsent  = "отсутствует название Модели"
+	OpenRouterPromptIsAbsent = "отсутсвует промпт для Модели"
 )
 
 // ошибки open_router

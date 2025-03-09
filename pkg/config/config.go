@@ -49,7 +49,6 @@ func Init() (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return &config, nil
 }
 
@@ -80,10 +79,16 @@ func parseEnv(cfg *Config) error {
 		return errors.New(consts.OpenRouterModelIsAbsent)
 	}
 
+	prompt := os.Getenv("PROMPT")
+	if prompt == "" {
+		return errors.New(consts.OpenRouterPromptIsAbsent)
+	}
+
 	cfg.BotSettings.OpenRtr = openrouter.Client{
 		APIUrl: apiUrl,
 		Model:  model,
 		APIKey: openRouterToken,
+		Prompt: prompt,
 	}
 
 	cfg.BotSettings.TelegramToken = telegramToken

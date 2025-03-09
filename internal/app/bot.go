@@ -39,7 +39,7 @@ func NewBot(cfg config.BotSettings, logger *myLogger.Logger) (*BotConfig, error)
 	middlewares := middleware.NewMiddleware(logger)
 
 	// инициализируем openrouter
-	openRtr := openrouter.NewClient(cfg.OpenRtr.APIKey, cfg.OpenRtr.APIUrl, cfg.OpenRtr.Model)
+	openRtr := openrouter.NewClient(cfg.OpenRtr.APIKey, cfg.OpenRtr.APIUrl, cfg.OpenRtr.Model, cfg.OpenRtr.Prompt)
 
 	// создание мапы юзерс
 	users := make(map[int64]user.User)

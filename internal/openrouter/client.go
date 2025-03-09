@@ -22,13 +22,15 @@ type Client struct {
 	APIKey string
 	APIUrl string
 	Model  string
+	Prompt string
 }
 
-func NewClient(APIKey, APIUrl, Model string) *Client {
+func NewClient(APIKey, APIUrl, Model, Prompt string) *Client {
 	return &Client{
 		APIKey: APIKey,
 		APIUrl: APIUrl,
 		Model:  Model,
+		Prompt: Prompt,
 	}
 }
 
@@ -41,16 +43,17 @@ type ResponseBody struct {
 func (c *Client) GetResponse(text string) (string, error) {
 
 	message := Message{
-		Role:    "student",
+		Role:    "user",
 		Content: text,
 	}
 
 	messages := append([]Message{
 		{
 			Role:    "system",
-			Content: "Ты бот в тг",
+			Content: c.Prompt,
 		},
 	}, message)
+	fmt.Println(messages)
 
 	requestBody := struct {
 		Model    string    `json:"model"`

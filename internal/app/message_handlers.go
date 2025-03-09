@@ -26,7 +26,7 @@ func (bot *BotConfig) HandlerMessage(c tele.Context) error {
 			log.Printf("пустой ответ от ИИ, выполнение повторного запроса...")
 		} else {
 			log.Printf("%s | %s", bot.Self.Me.Username, strings.Replace(response, "\n\n", "\n", -1))
-			return c.Send(response)
+			return c.Send(response, &tele.SendOptions{ParseMode: tele.ModeHTML})
 		}
 		time.Sleep(1 * time.Second)
 	}
