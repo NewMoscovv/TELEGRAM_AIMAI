@@ -11,6 +11,7 @@ import (
 type BotConfig struct {
 	Self       *tele.Bot
 	Middleware *middleware.Middleware
+	Messages   config.Messages
 }
 
 func NewBot(cfg config.BotSettings, logger *myLogger.Logger) (*BotConfig, error) {
@@ -31,7 +32,7 @@ func NewBot(cfg config.BotSettings, logger *myLogger.Logger) (*BotConfig, error)
 	// инициализация мидлвари
 	middlewares := middleware.NewMiddleware(logger)
 
-	return &BotConfig{Self: bot, Middleware: middlewares}, nil
+	return &BotConfig{Self: bot, Middleware: middlewares, Messages: cfg.Messages}, nil
 
 }
 
