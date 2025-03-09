@@ -1,7 +1,7 @@
 package main
 
 import (
-	myApp "AIMAI/pkg/app"
+	myApp "AIMAI/internal/app"
 	"AIMAI/pkg/config"
 	myLogger "AIMAI/pkg/logger"
 )

@@ -1,9 +1,9 @@
 package app
 
 import (
+	"AIMAI/internal/middleware"
 	"AIMAI/pkg/config"
 	myLogger "AIMAI/pkg/logger"
-	"AIMAI/pkg/middleware"
 	tele "gopkg.in/telebot.v3"
 	"time"
 )
