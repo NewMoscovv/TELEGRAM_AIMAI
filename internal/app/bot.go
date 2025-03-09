@@ -6,6 +6,7 @@ import (
 	"AIMAI/pkg/config"
 	myLogger "AIMAI/pkg/logger"
 	tele "gopkg.in/telebot.v3"
+	"sync"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type BotConfig struct {
 	Middleware *middleware.Middleware
 	Messages   config.Messages
 	Users      map[int64]user.User
+
+	mu sync.RWMutex
 }
 
 func NewBot(cfg config.BotSettings, logger *myLogger.Logger) (*BotConfig, error) {
@@ -54,4 +57,17 @@ func (bot *BotConfig) Start() {
 
 	bot.Self.Start()
 
+}
+
+func (bot *BotConfig) getUser(chatID int64) (user.User, bool) {
+	bot.mu.RLock()
+	defer bot.mu.RUnlock()
+	curUser, ok := bot.Users[chatID]
+	return curUser, ok
+}
+
+func (bot *BotConfig) setUserStatus(chatID int64, user user.User) {
+	bot.mu.Lock()
+	defer bot.mu.Unlock()
+	bot.Users[chatID] = user
 }
