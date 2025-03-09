@@ -37,9 +37,7 @@ func NewBot(cfg config.BotSettings, logger *myLogger.Logger) (*BotConfig, error)
 
 func (bot *BotConfig) SetupHandlers() {
 
-	bot.Self.Handle("/start", bot.Middleware.LoggingMiddleware(func(c tele.Context) error {
-		return c.Send("hello world")
-	}))
+	bot.Self.Handle("/start", bot.Middleware.LoggingMiddleware(bot.HandlerStart))
 }
 
 func (bot *BotConfig) Start() {
