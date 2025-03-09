@@ -1,6 +1,7 @@
 package config
 
 import (
+	"AIMAI/pkg/consts"
 	"errors"
 	"github.com/joho/godotenv"
 	"os"
@@ -23,7 +24,7 @@ func Init() (*Config, error) {
 
 	telegramToken := os.Getenv("TELEGRAM_TOKEN")
 	if telegramToken == "" {
-		return nil, errors.New("отсутствует TELEGRAM_TOKEN")
+		return nil, errors.New(consts.TelegramTokenIsAbsent)
 	}
 
 	return &Config{
