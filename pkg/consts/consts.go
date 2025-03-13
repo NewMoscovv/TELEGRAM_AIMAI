@@ -3,5 +3,5 @@ package consts
 const (
 	MaxAmountResponses = 10
 
-	MaxFreeDialogLen = 20
+	MaxFreeDialogLen = 2
 )

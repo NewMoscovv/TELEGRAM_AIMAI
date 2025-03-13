@@ -21,12 +21,6 @@ func (m *Middleware) LoggingMiddleware(next tele.HandlerFunc) tele.HandlerFunc {
 		}
 		m.logger.Info.Printf("%s | %s", username, c.Message().Text)
 
-		err := next(c)
-
-		if err != nil {
-			m.logger.Err.Printf("ТЕЛО ОШИБКИ - %s", err)
-			return err
-		}
-		return nil
+		return next(c)
 	}
 }

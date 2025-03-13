@@ -40,20 +40,14 @@ type ResponseBody struct {
 	} `json:"choices"`
 }
 
-func (c *Client) GetResponse(text string) (string, error) {
+func (c *Client) GetResponse(messages []Message) (string, error) {
 
-	message := Message{
-		Role:    "user",
-		Content: text,
-	}
-
-	messages := append([]Message{
+	messages = append([]Message{
 		{
 			Role:    "system",
 			Content: c.Prompt,
 		},
-	}, message)
-	fmt.Println(messages)
+	}, messages...)
 
 	requestBody := struct {
 		Model    string    `json:"model"`
